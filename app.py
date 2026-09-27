@@ -236,13 +236,15 @@ st.markdown("""
     /* Стили кнопок (Белый премиум-стиль как на макете) */
     .stButton > button, .stDownloadButton > button { 
         background-color: #ffffff !important; 
-        color: #000000 !important; 
         border: none !important;
         border-radius: 8px !important; 
-        font-weight: 600 !important; 
         width: 100% !important; 
         padding: 12px !important;
         transition: 0.3s;
+    }
+    .stButton > button *, .stDownloadButton > button * {
+        color: #000000 !important;
+        font-weight: 600 !important;
     }
     .stButton > button:hover, .stDownloadButton > button:hover { 
         background-color: #e4e4e7 !important; 
@@ -252,6 +254,8 @@ st.markdown("""
     /* Вторичные кнопки (Перемешать и тд) */
     .stButton[data-testid="stButton"] button:nth-of-type(2) {
         background-color: #27272a !important;
+    }
+    .stButton[data-testid="stButton"] button:nth-of-type(2) * {
         color: #ffffff !important;
     }
 
@@ -350,11 +354,9 @@ if not st.session_state.logged_in:
     col1, col2, col3 = st.columns([1, 1.5, 1])
     with col2:
         st.markdown(f"<h1 style='text-align: center; font-size: 3rem;'>🧠 {t['title']}</h1>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center; color: #a1a1aa !important;'>{t['subtitle']}</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center; color: #a1a1aa !important;'>{t['subtitle']}</p><br>", unsafe_allow_html=True)
         
-        st.markdown("<div style='background-color: #141415; padding: 30px; border-radius: 12px; border: 1px solid #27272a;'>", unsafe_allow_html=True)
         name = st.text_input(t["name_input"], placeholder="Иван Иванов")
-        st.markdown("<br>", unsafe_allow_html=True)
         if st.button(t["login_btn"]):
             if name:
                 if name.strip().upper() == "TEN10Y":
@@ -367,7 +369,6 @@ if not st.session_state.logged_in:
                     log_action(st.session_state.user_name, "User logged in")
                 st.session_state.logged_in = True
                 st.rerun()
-        st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
 # 2. ОСНОВАТЕЛЬ КАБИНЕТІ (АДМИН)
